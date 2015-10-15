@@ -1,0 +1,88 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Actualiza la información  
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#/"><i class="fa fa-home"></i> Inicio</a></li>
+    <li><a href="#/recargasCRD">Tarjetas SIM</a></li>
+    <li class="active">Actualiza la información</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">          
+  <div class="login-box">
+    <h4>Detalles del Producto</h4>    
+    <form class="form-horizontal" role="form" name="form">
+      <div class="form-group has-feedback" ng-class="{'has-error': form.codigoBarras.$invalid, 'has-success': form.codigoBarras.$valid}">           
+        <input id="inputcodigoBarras" disabled type="text" placeholder="Código de barras"  class="form-control" name="codigoBarras" ng-model="productsList.codigoBarras" required>
+        <div ng-show="form.codigoBarras.$dirty && form.codigoBarras.$invalid">
+          <p class="help-block text-danger" ng-show="form.codigoBarras.$error.required">Campo obligatorio</p>
+        </div>
+      </div>
+      <div class="form-group has-feedback" ng-class="{'has-error': form.referencia.$invalid, 'has-success': form.referencia.$valid}">           
+          <input id="inputreferencia" type="text" placeholder="Referencia"  class="form-control" name="referencia" ng-model="productsList.referencia" required>
+          <div ng-show="form.referencia.$dirty && form.referencia.$invalid">
+            <p class="help-block text-danger" ng-show="form.referencia.$error.required">Campo obligatorio</p>
+          </div>
+      </div>               
+      <div class="form-group has-feedback" ng-class="{'has-error': form.descripcion.$invalid, 'has-success': form.descripcion.$valid}">           
+          <input id="inputdescripcion" type="text" placeholder="Descripción"  class="form-control" name="descripcion" ng-model="productsList.descripcion" required>
+          <div ng-show="form.descripcion.$dirty && form.descripcion.$invalid">
+            <p class="help-block text-danger" ng-show="form.descripcion.$error.required">Campo obligatorio</p>                      
+          </div>
+      </div>
+      <div class="form-group has-feedback" ng-class="{'has-error': form.precioUnitario.$invalid, 'has-success': form.precioUnitario.$valid}">           
+          <input id="inputprecioUnitario" type="text" placeholder="Precio Unitario"  class="form-control" name="precioUnitario" ng-model="productsList.precioUnitario" required>                               
+          <div ng-show="form.precioUnitario.$dirty && form.precioUnitario.$invalid">
+            <p class="help-block text-danger" ng-show="form.precioUnitario.$error.required">Campo obligatorio</p>
+          </div>
+      </div>
+      <div class="form-group has-feedback" ng-class="{'has-error': form.cantidad.$invalid, 'has-success': form.cantidad.$valid}">           
+          <input id="inputcantidad" type="number" placeholder="Cantidad a ingresar"  class="form-control" name="cantidad" ng-model="productsList.cantidad" required>                               
+          <div ng-show="form.cantidad.$dirty && form.cantidad.$invalid">
+            <p class="help-block text-danger" ng-show="form.cantidad.$error.required">Campo obligatorio</p>
+          </div>
+      </div>
+      <div class="form-group has-feedback" ng-class="{'has-error': form.grupo.$invalid, 'has-success': form.grupo.$valid}">  
+          <select id="inputgrupo" placeholder="Grupo" class="form-control" name="grupo" ng-model="productsList.grupo" required>
+            <option>Verduras</option>
+            <option>Frutas</option>
+            <option>Abarrotes</option>
+          </select> 
+          <div ng-show="form.grupo.$dirty && form.grupo.$invalid">
+            <p class="help-block text-danger" ng-show="form.grupo.$error.required">Campo obligatorio</p>
+          </div>                   
+      </div>   
+      <div class="form-group has-feedback" ng-class="{'has-error': form.unidad.$invalid, 'has-success': form.unidad.$valid}">  
+          <select id="inputunidad" placeholder="Unidad" class="form-control" name="unidad" ng-model="productsList.unidad" required>
+            <option>Kilogramos</option>
+            <option>Libras</option>
+            <option>Toneladas largas</option>
+            <option>Toneladas metricas</option>
+            <option>Toneladas cortas</option>
+            <option>Gramos</option>
+            <option>Unidades</option>
+            <option>Litros</option>
+            <option>Galones</option>
+            <option>Barriles</option>
+            <option>Latas</option>
+            <option>Cajas</option>
+            <option>Millares</option>
+            <option>Metros cubicos</option>
+            <option>Metros</option>
+            <option>Otros</option>
+          </select> 
+          <div ng-show="form.unidad.$dirty && form.unidad.$invalid">
+            <p class="help-block text-danger" ng-show="form.unidad.$error.required">Campo obligatorio</p>
+          </div>                   
+      </div>                       
+
+      <div class="form-group pull-right">        
+          <a ng-click="cancel()" class="btn btn-small">Cancelar</a>
+          <a ng-click="updateProduct()" class="btn btn-small btn-primary">Actualizar</a>        
+      </div>
+    </form>    
+  </div>
+</section><!-- /.content -->

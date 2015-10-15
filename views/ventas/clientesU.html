@@ -1,0 +1,66 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Actualiza la información    
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#/"><i class="fa fa-home"></i> Inicio</a></li>
+    <li><a href="#/clientesCRD">Ventas</a></li>
+    <li class="active">Actualiza la información</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">          
+  <div class="login-box">
+    <h4>Detalles del Cliente</h4>    
+    <form class="form-horizontal" role="form" name="form">
+      <div class="form-group has-feedback" ng-class="{'has-error': form.id.$invalid, 'has-success': form.id.$valid}">           
+          <input id="inputid" disabled type="text" placeholder="Id"  class="form-control" name="id" ng-model="clientes.id" required>                               
+          <div ng-show="form.id.$dirty && form.id.$invalid">
+            <p class="help-block text-danger" ng-show="form.id.$error.required">Campo obligatorio</p>
+          </div>
+      </div>
+      <div class="form-group has-feedback" ng-class="{'has-error': form.name.$invalid, 'has-success': form.name.$valid}">           
+          <input id="inputname" type="text" placeholder="Nombre"  class="form-control" name="name" ng-model="clientes.nombre" required>                               
+          <div ng-show="form.name.$dirty && form.name.$invalid">
+            <p class="help-block text-danger" ng-show="form.name.$error.required">Campo obligatorio</p>
+          </div>
+      </div>      
+      <div class="form-group has-feedback" ng-class="{'has-error': form.email.$invalid, 'has-success': form.email.$valid}">           
+          <input id="inputEmail" type="email" placeholder="E-mail"  class="form-control" name="email" ng-model="clientes.correo" required>                                 
+          <div ng-show="form.email.$dirty && form.email.$invalid">
+            <p class="help-block text-danger" ng-show="form.email.$error.required">Campo obligatorio</p>
+            <p class="help-block text-danger" ng-show="form.email.$error.email">Email invalido</p>
+          </div>
+      </div>
+      <div class="form-group has-feedback" ng-class="{'has-error': form.address.$invalid, 'has-success': form.address.$valid}">           
+          <input id="inputaddress" type="text" placeholder="Dirección"  class="form-control" name="address" ng-model="clientes.direccion" required>                               
+          <div ng-show="form.address.$dirty && form.address.$invalid">
+            <p class="help-block text-danger" ng-show="form.address.$error.required">Campo obligatorio</p>
+          </div>
+      </div>
+      <div class="form-group has-feedback" ng-class="{'has-error': form.phone.$invalid, 'has-success': form.phone.$valid}">           
+          <input id="inputphone" type="text" placeholder="Teléfono"  class="form-control" name="phone" ng-model="clientes.telefono" required>                               
+          <div ng-show="form.phone.$dirty && form.phone.$invalid">
+            <p class="help-block text-danger" ng-show="form.phone.$error.required">Campo obligatorio</p>
+          </div>
+      </div>  
+      <div class="form-group has-feedback" ng-class="{'has-error': form.area.$invalid, 'has-success': form.area.$valid}">  
+          <select id="inputarea" placeholder="Zona" class="form-control" name="area" ng-model="clientes.area" required>
+            <option>Zona Principal</option>
+            <option>Zona Rural</option>
+            <option>Zona Secundaria</option>
+          </select> 
+          <div ng-show="form.area.$dirty && form.area.$invalid">
+            <p class="help-block text-danger" ng-show="form.area.$error.required">Campo obligatorio</p>
+          </div>                   
+      </div>                   
+
+      <div class="form-group pull-right">        
+          <a ng-click="cancel()" class="btn btn-small">Cancelar</a>
+          <a ng-click="updateCustomer()" class="btn btn-small btn-primary">Actualizar</a>        
+      </div>
+    </form>    
+  </div>
+</section><!-- /.content -->

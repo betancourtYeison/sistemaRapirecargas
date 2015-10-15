@@ -1,0 +1,70 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Productos de la factura: {{noFactura}}
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#/"><i class="fa fa-home"></i> Inicio</a></li>
+    <li><a href="#/reporteVentas">Reportes</a></li>
+    <li><a href="#/reporteVentas">Reporte de Ventas</a></li>
+    <li class="active">Reporte de Productos</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">        
+        <div class="panel panel-primary" id="detalle_compra">
+        <div class="panel-heading">
+          
+          <div class="input-group">
+            <span class="text-left panel-title">Página: {{tableParams.page()}}</span>                   
+            <button type="button" class="btn btn-default pull-right" ng-click="regresarReportes()" aria-describedby="basic-addon2">Volver</button> 
+            <span class="input-group-addon" id="basic-addon2"><a ng-click="regresarReportes()"><span class="glyphicon glyphicon-chevron-left"></span></a></span>
+          </div>
+          
+          <div class="input-group" style="margin-top: 20px">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input type="text" class="form-control" placeholder="Buscar por código de barras" ng-model="buscar.codigoBarras">
+          </div>
+        </div>        
+        
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table ng-table="tableParams" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th style="min-width: 80px;">
+                    Codigo de Barras
+                    <span ng-hide="sort" class="fa fa-sort-amount-asc" style="cursor: pointer" ng-click="ordenarPor('-noFactura',true)"></span>
+                    <span ng-show="sort" class="fa fa-sort-amount-desc" style="cursor: pointer" ng-click="ordenarPor('noFactura',false)"></span>                                    
+                  </th>
+                  <th style="min-width: 80px;">
+                    Referencia
+                    <span ng-hide="sort" class="fa fa-sort-amount-asc" style="cursor: pointer" ng-click="ordenarPor('-fecha',true)"></span>
+                    <span ng-show="sort" class="fa fa-sort-amount-desc" style="cursor: pointer" ng-click="ordenarPor('fecha',false)"></span> 
+                  </th>
+                  <th style="min-width: 80px;">Valor Unitario </th>
+                  <th style="min-width: 80px;">Cantidad</th>
+                  <th style="min-width: 80px;">Valor Total</th>                                
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="producto in $data | orderBy:ordenSeleccionado | filter:buscar">
+                  <td>{{ producto.codigo }}</td>
+                  <td>{{ producto.referencia }}</td> 
+                  <td>{{ producto.valorUni }}</td>                  
+                  <td>{{ producto.cantidad }}</td>
+                  <td>{{ producto.valorTot }}</td>                       
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th style="border-right-width: 1px;">Datos por página: {{tableParams.count()}}</th>                  
+                </tr>                
+              </tfoot>            
+            </table>
+          </div>
+        </div><!-- /.box-body -->
+  </div><!-- /.box -->
+
+</section><!-- /.content -->

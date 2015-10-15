@@ -1,0 +1,18 @@
+/* Animacion para los divs */
+.animacion {
+	-webkit-transition: ease-in-out 0.5s;
+    -moz-transition: ease-in-out 0.5s;
+    -ms-transition: ease-in-out 0.5s;
+    -o-transition: ease-in-out 0.5s;
+    transition: ease-in-out 0.5s;
+}
+
+/* Animacion para los divs */
+.animacion.ng-hide {
+  	opacity:0;
+}
+
+/* Animacion para los divs */
+.animacion.ng-show {
+  	opacity:0;
+}

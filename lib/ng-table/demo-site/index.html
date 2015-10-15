@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ngTable Examples</title>
+    <link rel="stylesheet" href="css/docs.css">
+    <link rel="stylesheet" href="css/social.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.css">
+
+    <!--[if lt IE 9]>
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <![endif]-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-resource.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-route.js"></script>
+    <script src="https://rawgit.com/esvit/ng-table/master/dist/ng-table.min.js"></script>
+    <script src="js/embed-codepen.min.js"></script>
+
+    <script src="js/angular-social.js"></script>
+
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/8.0/styles/github.min.css">
+    <script src="http://yandex.st/highlightjs/8.0/highlight.min.js"></script>
+</head>
+<body ng-app="main">
+<a target="_blank" href="https://github.com/esvit/ng-table"><img style="position: absolute; z-index: 100; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+
+<div class="row">
+    <div class="col-md-9">
+
+        <div class="padded">
+            <div ng-view></div>
+        </div>
+
+    </div>
+    <div class="col-md-3">
+
+        <div class="bs-docs-sidebar hidden-print" role="complementary">
+
+            <ul class="nav bs-docs-sidenav">
+                <li>
+                    <h1>ngTable</h1>
+                </li>
+                <li class="active">
+                    <a href="#/">0. Intro</a>
+                    <ul class="nav">
+                        <li><a href="#/intro/demo-real-world">Real world example</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#dropdowns">x. Loading data</a>
+                    <ul class="nav">
+                        <li><a href="#/loading/overview">Overview</a></li>
+                        <li><a href="#/loading/demo-managed-array">Managed array</a></li>
+                        <li><a href="#/loading/demo-lazy-loaded">Lazy loading managed array</a></li>
+                        <li><a href="#/loading/demo-external-array">External array (eg server-side)</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#dropdowns">x. Pagination</a>
+                    <ul class="nav">
+                        <li><a href="#/pagination/demo-pager-basic">Basic example</a></li>
+                        <li><a href="#/pagination/demo-api">Change page / page controls programmatically</a></li>
+                        <li><a href="#/demo/todo">Custom template</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#dropdowns">x. Sorting</a>
+                    <ul class="nav">
+                        <li><a href="#/sorting/demo-sorting-basic">Basic example</a></li>
+                        <li><a href="#/sorting/demo-api">Select sort order programmatically</a></li>
+                        <li><a href="#/sorting/demo-enabling">Enable sorting at runtime</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#btn-groups">x. Filtering</a>
+                    <ul class="nav">
+                        <li><a href="#/filtering/demo-filtering-basic">Basic example</a></li>
+                        <li><a href="#/filtering/demo-custom-template">Custom filter template</a></li>
+                        <li><a href="#/demo/todo">Multiple column filters</a></li>
+                        <li><a href="#/demo/todo">Change filter values programmatically</a></li>
+                        <li><a href="#/demo/todo">Enable filters at runtime</a></li>
+                        <li><a href="#/demo/todo">Replace filter algorithm</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#btn-dropdowns">x. Grouping</a>
+                    <ul class="nav">
+                        <li><a href="#/demo/4-1">Basic example</a></li>
+                        <li><a href="#/demo/4-2">Grouping with callback</a></li>
+                        <li><a href="#/demo/4-3">Dynamic grouping</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="">x. Summary row</a>
+                    <ul class="nav">
+                        <li><a href="#/demo/todo">Basic example</a></li>
+                        <li><a href="#/demo/todo">Example with grouping</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#/">x. Columns declared in JS</a>
+                    <ul class="nav">
+                        <li><a href="#/demo/todo">Basic example</a></li>
+                        <li><a href="#/demo/todo">Displaying cell values</a></li>
+                        <li><a href="#/demo/todo">Customize column definition</a></li>
+                        <li><a href="#/demo/todo">Columns partly defined in html</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#/">x. Formatting table</a>
+                    <ul class="nav">
+                        <li><a href="#/demo/todo">Data cell template</a></li>
+                        <li><a href="#/demo/todo">Data row template</a></li>
+                        <li><a href="#/demo/todo">Header cell template - basic</a></li>
+                        <li><a href="#/demo/todo">Header cell template - full</a></li>
+                        <li><a href="#/demo/todo">Custom header</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#/">x. Working with rows and columns</a>
+                    <ul class="nav">
+                        <li><a href="#/demo/todo">Show/hide columns</a></li>
+                        <li><a href="#/demo/todo">Checkbox row selector</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#/">x. Editing data</a>
+                    <ul class="nav">
+                        <li><a href="#/demo/todo">Basic spreadsheet</a></li>
+                        <li><a href="#/demo/todo">Inline row edit</a></li>
+                        <li><a href="#/demo/todo">Extend with x-editable</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#/">x. Events</a>
+                    <ul class="nav">
+                        <li><a href="#/demo/todo">Overview</a></li>
+                        <li><a href="#/demo/todo">Example</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#/">x. Global customizations</a>
+                    <ul class="nav">
+                        <li><a href="#/demo/todo">Response interceptors</a></li>
+                        <li><a href="#/demo/todo">Change default parameters and settings</a></li>
+                        <li><a href="#/demo/todo">Replace default filter/sorting algorithm</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="#glyphicons">x. Miscellaneous</a>
+                    <ul class="nav">
+                        <li><a href="#/demo/5-1">Saving params in url</a></li>
+                    </ul>
+                </li>
+                <li class="active">
+                    <a href="">x. Plugins</a>
+                    <ul class="nav">
+                        <li><a href="#/demo/todo">Resize columns</a></li>
+                        <li><a href="#/demo/todo">Export to CSV</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<footer class="bs-footer">
+    <p>Made with love in <strong>Ukraine</strong>. On any questions or propositions write me a letter <a href="mailto:esvit666@gmail.com">esvit666@gmail.com</a></p>
+    <p>Code licensed under <a href="http://creativecommons.org/licenses/BSD/" target="_blank">New BSD License</a>.</p>
+
+    <ul ng-social-buttons class="padded"
+        data-url="'http://bazalt-cms.com/ng-table/'"
+        data-title="'ngTable: cool directive for simple and easy work with table on AngularJS'"
+        data-description="'Angular Table directive'">
+        <li class="ng-social-facebook">Facebook</li>
+        <li class="ng-social-twitter">Twitter</li>
+        <li class="ng-social-google-plus">Google+</li>
+        <li class="ng-social-github" user="esvit" repository="ng-table">GitHub</li>
+        <li class="ng-social-github-forks" user="esvit" repository="ng-table">Forks</li>
+    </ul>
+</footer>
+
+<script src="app/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="UTF-8">
+    <title>AdminLTE 2 | Facturación</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) -->
+    <!-- Bootstrap 3.3.4 -->
+    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap 3.3.4 -->
+    <link href="lib/ng-table/dist/ng-table.min.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome Icons -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <!-- Ionicons -->
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <!-- DATA TABLES -->
+    <link href="plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <!-- Theme style -->
+    <link href="styles/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="shortcut icon" href="favicon.ico"> 
+    <link href="styles/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="styles/animacion.css">
+  </head>
+  <!-- ADD THE CLASS fixed TO GET A FIXED HEADER AND SIDEBAR LAYOUT -->
+  <!-- the fixed layout is not compatible with sidebar-mini -->
+  <body class="skin-blue fixed sidebar-mini" ng-app="facturacionAdminApp">  
+    <!-- Site wrapper -->
+    <div class="wrapper" ng-controller="LoginCtrl">
+
+      <header class="main-header">
+        <!-- Logo -->
+        <a href="#/" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>CA-W</b></span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>Admin </b>CreArte-Web</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- Messages: style can be found in dropdown.less-->              
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                  <img src="img/user.png" class="user-image" alt="User Image" />
+                  <span class="hidden-xs">{{user}}</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="img/user.png" class="img-circle" alt="User Image" />
+                    <p>
+                      {{user}}
+                      <small>Desarrollador Web</small>
+                    </p>
+                  </li>                                  
+                  <!-- Menu Footer-->
+                  <li class="user-footer">                    
+                    <div class="text-center">
+                      <a href="" class="btn btn-primary btn-flat" ng-click="logout()">Salir</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+              <!-- Control Sidebar Toggle Button -->
+              <li>
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <!-- =============================================== -->
+
+      <!-- Left side column. contains the sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- Sidebar user panel -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <img src="img/user.png" class="img-circle" alt="User Image" />
+            </div>
+            <div class="pull-left info">
+              <p>{{user}}</p>
+              <i class="fa fa-circle text-success"></i> en línea
+            </div>
+          </div>
+          <!-- search form -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Buscar..." />
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <ul class="sidebar-menu">
+            <li class="header">NAVEGADOR</li>
+            <li class="treeview active">
+              <a href="#/">
+                <i class="fa fa-home"></i> <span>Inicio</span> 
+              </a>              
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-cart-plus"></i>
+                <span>Ventas</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#/registroVentasCRD"><i class="fa fa-dot-circle-o"></i> Registro de Ventas</a></li>                
+                <li><a href="#/clientesCRD"><i class="fa fa-dot-circle-o"></i> Clientes</a></li>
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-stack-overflow"></i>
+                <span>Inventario</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">                
+                <li><a href="#/stockActual"><i class="fa fa-dot-circle-o"></i> Stock Actual</a></li>
+              </ul>
+            </li>                        
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-cubes"></i>
+                <span>Productos</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">                
+                <li><a href="#/listaProductosCRD"><i class="fa fa-dot-circle-o"></i> Listado de Productos</a></li>                
+              </ul>
+            </li>      
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-usd"></i>
+                <span>Recargas</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">                
+                <li><a href="#/recargasCRD"><i class="fa fa-dot-circle-o"></i> Control de Recargas</a></li>                
+              </ul>
+            </li>  
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-phone"></i>
+                <span>Llamadas Internacionales</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">                
+                <li><a href="#/llamadasInterCRD"><i class="fa fa-dot-circle-o"></i> Control de Llamadas</a></li>                
+              </ul>
+            </li>   
+             <li class="treeview">
+              <a href="#">
+                <i class="fa fa-credit-card"></i>
+                <span>Tarjetas SIM</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">                
+                <li><a href="#/tarjetasSIMCRD"><i class="fa fa-dot-circle-o"></i> Control de Tarjetas SIM</a></li>                
+              </ul>
+            </li>             
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-print"></i>
+                <span>Reportes</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#/reporteVentas"><i class="fa fa-dot-circle-o"></i> Reporte de Ventas</a></li>                
+              </ul>
+            </li>
+            <li class="header">ETIQUETAS</li>
+            <li><a href=""><i class="fa fa-circle-o text-red"></i> <span>Importante</span></a></li>
+            <li><a href=""><i class="fa fa-circle-o text-yellow"></i> <span>Peligro</span></a></li>
+            <li><a href=""><i class="fa fa-circle-o text-aqua"></i> <span>Información</span></a></li>
+          </ul>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- =============================================== -->
+
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <div ng-view=""></div>
+      </div><!-- /.content-wrapper -->
+
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b><a href="http://crearte-web.com/" target="_blank">CreArte-Web</a></b>
+        </div>
+        <strong>Copyright &copy; 2015-2016.</strong> Derechos Reservados.
+      </footer>
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+          <li><a href="" data-target="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+          <li><a href="" data-target="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <!-- Home tab content -->
+          <div class="tab-pane" id="control-sidebar-home-tab">
+            <h3 class="control-sidebar-heading">Actividad Reciente</h3>
+            <ul class="control-sidebar-menu">
+              <li>
+                <a href="javascript::;">
+                  <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">Cumpleaños de Yeison</h4>
+                    <p>Será el 04 de Octubre</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript::;">
+                  <i class="menu-icon fa fa-user bg-yellow"></i>
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">Yeison actualizó su perfil</h4>
+                    <p>Nuevo teléfono (+57) 322 613 2604</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript::;">
+                  <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">Correos Yeison/h4>
+                    <p>yeisonbe10@hotmail.com</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript::;">
+                  <i class="menu-icon fa fa-file-code-o bg-green"></i>
+                  <div class="menu-info">
+                    <h4 class="control-sidebar-subheading">Cron Job 254 Ejecutado</h4>
+                    <p>5 segundo en tiempo de ejecución</p>
+                  </div>
+                </a>
+              </li>
+            </ul><!-- /.control-sidebar-menu -->
+
+            <h3 class="control-sidebar-heading">Barra de progreso</h3>
+            <ul class="control-sidebar-menu">
+              <li>
+                <a href="javascript::;">
+                  <h4 class="control-sidebar-subheading">
+                    Diseño de la plantilla
+                    <span class="label label-danger pull-right">70%</span>
+                  </h4>
+                  <div class="progress progress-xxs">
+                    <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript::;">
+                  <h4 class="control-sidebar-subheading">
+                    Resumen Actualizado
+                    <span class="label label-success pull-right">95%</span>
+                  </h4>
+                  <div class="progress progress-xxs">
+                    <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript::;">
+                  <h4 class="control-sidebar-subheading">
+                    Integración
+                    <span class="label label-warning pull-right">50%</span>
+                  </h4>
+                  <div class="progress progress-xxs">
+                    <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="javascript::;">
+                  <h4 class="control-sidebar-subheading">
+                    Back End Framework
+                    <span class="label label-primary pull-right">68%</span>
+                  </h4>
+                  <div class="progress progress-xxs">
+                    <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+                  </div>
+                </a>
+              </li>
+            </ul><!-- /.control-sidebar-menu -->
+
+          </div><!-- /.tab-pane -->
+          <!-- Stats tab content -->
+          <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div><!-- /.tab-pane -->
+          <!-- Settings tab content -->
+          <div class="tab-pane" id="control-sidebar-settings-tab">
+            <form method="post">
+              <h3 class="control-sidebar-heading">Ajustes Generales</h3>
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  Reportar uso del panel
+                  <input type="checkbox" class="pull-right" checked />
+                </label>
+                <p>
+                  Alguna información acerca de las opciones generales
+                </p>
+              </div><!-- /.form-group -->
+
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  Permitir re-direccionamiento correos
+                  <input type="checkbox" class="pull-right" checked />
+                </label>
+                <p>
+                  Otros ajustes están disponibles
+                </p>
+              </div><!-- /.form-group -->
+
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  Mostrar nombres
+                  <input type="checkbox" class="pull-right" checked />
+                </label>
+                <p>
+                  Permitir ver nombres en los comentarios de los artículos
+                </p>
+              </div><!-- /.form-group -->
+
+              <h3 class="control-sidebar-heading">Chat Settings</h3>
+
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  Mostrar si estoy en linea
+                  <input type="checkbox" class="pull-right" checked />
+                </label>
+              </div><!-- /.form-group -->
+
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  Apagar Notificaciones
+                  <input type="checkbox" class="pull-right" />
+                </label>
+              </div><!-- /.form-group -->
+
+              <div class="form-group">
+                <label class="control-sidebar-subheading">
+                  Eliminar historial del chat
+                  <a href="javascript::;" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
+                </label>
+              </div><!-- /.form-group -->
+            </form>
+          </div><!-- /.tab-pane -->
+        </div>
+      </aside><!-- /.control-sidebar -->
+      <!-- Add the sidebar's background. This div must be placed
+           immediately after the control sidebar -->
+      <div class="control-sidebar-bg"></div>
+    </div><!-- ./wrapper -->
+  </body>
+
+   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/oldieshim.js -->
+    <!--[if lt IE 9]>
+    <script src="lib/es5-shim/es5-shim.js"></script>
+    <script src="lib/json3/lib/json3.js"></script>
+    <![endif]-->
+    <!-- endbuild -->
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/angular-animate/angular-animate.min.js"></script>      
+    <script src="lib/angular-route/angular-route.min.js"></script>
+    <script src="lib/firebase/firebase.js"></script>
+    <script src="lib/angularfire/dist/angularfire.min.js"></script>    
+    <script src="lib/firebase-simple-login/firebase-simple-login.js"></script>          
+    <script src="lib/ng-table/dist/ng-table.min.js"></script>          
+    <!-- endbower -->
+    <!-- endbuild -->
+
+     <!-- build:js({.tmp,app}) scripts/scripts.js -->
+      <script src="scripts/admin/appAdmin.js"></script>
+      <script src="scripts/firebase/configFirebase.js"></script>
+      <script src="scripts/firebase/services.js"></script>
+      <script src="scripts/firebase/service.firebase.js"></script>
+      <script src="scripts/admin/controllers/login.js"></script>
+      <script src="scripts/admin/services/login.js"></script>      
+      <script src="scripts/admin/controllers/registroVentasCRD.js"></script>
+      <script src="scripts/admin/services/registroVentasCRD.js"></script>            
+      <script src="scripts/admin/controllers/clientesCRD.js"></script>
+      <script src="scripts/admin/services/clientesCRD.js"></script>      
+      <script src="scripts/admin/controllers/clientesU.js"></script>
+      <script src="scripts/admin/services/clientesU.js"></script>            
+      <script src="scripts/admin/controllers/listadoProductosCRD.js"></script>
+      <script src="scripts/admin/services/listadoProductosCRD.js"></script>      
+      <script src="scripts/admin/controllers/listadoProductosU.js"></script>
+      <script src="scripts/admin/services/listadoProductosU.js"></script>
+      <script src="scripts/admin/controllers/recargasCRD.js"></script>
+      <script src="scripts/admin/services/recargasCRD.js"></script>      
+      <script src="scripts/admin/controllers/recargasU.js"></script>
+      <script src="scripts/admin/services/recargasU.js"></script>   
+      <script src="scripts/admin/controllers/llamadasInterCRD.js"></script>
+      <script src="scripts/admin/services/llamadasInterCRD.js"></script>      
+      <script src="scripts/admin/controllers/llamadasInterU.js"></script>
+      <script src="scripts/admin/services/llamadasInterU.js"></script>   
+      <script src="scripts/admin/controllers/tarjetasSIMCRD.js"></script>
+      <script src="scripts/admin/services/tarjetasSIMCRD.js"></script>      
+      <script src="scripts/admin/controllers/tarjetasSIMU.js"></script>
+      <script src="scripts/admin/services/tarjetasSIMU.j"></script> 
+      <script src="scripts/admin/controllers/reportesVentas.js"></script>
+      <script src="scripts/admin/services/reportesVentas.js"></script>      
+      <script src="scripts/admin/controllers/reportesVentasProducto.js"></script>
+      <script src="scripts/admin/services/reportesVentasProducto.js"></script>   
+      <!-- endbuild -->
+
+    <!-- jQuery 2.1.4 -->
+    <script src="plugins/jQuery/jQuery-2.1.4.min.js" type="text/javascript"></script>    
+    <!-- jsPDF -->
+    <script src="plugins/jsPDF/jspdf.min.js"></script>
+    <script src="plugins/jsPDF/jspdf.js"></script>
+    <script src="plugins/jsPDF/jspdf.plugin.split_text_to_size.js"></script>
+    <script src="plugins/jsPDF/jspdf.plugin.standard_fonts_metrics.js"></script>  
+    <!-- DATA TABES SCRIPT -->
+    <script src="plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+    <!-- SlimScroll -->
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <!-- FastClick -->
+    <script src="plugins/fastclick/fastclick.min.js" type="text/javascript"></script>
+    <!-- AdminLTE App -->
+    <script src="js/app.min.js" type="text/javascript"></script>        
+</html>

@@ -1,0 +1,145 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Clientes    
+  </h1>  
+  <ol class="breadcrumb">
+    <li><a href="#/"><i class="fa fa-home"></i> Inicio</a></li>
+    <li><a href="#/clientesCRD">Ventas</a></li>
+    <li class="active">Clientes</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content"> 
+  <div class="row">
+    <div class="col-lg-12">          
+      <div class="modal fade" id="newProvider" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <div ng-show="clienteCreado" class="alert alert-success alert-dismissible" role="alert" style="padding: 7px 30px 6px 8px; margin: -6px 45px 1px 0px;">
+                <button type="button" class="close" ng-click="closeAlert()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <span>El cliente se ha registrado exitosamente.</span>
+              </div>
+              <h4 class="modal-title" id="myModalLabel">Nuevo Cliente</h4>
+              <div id="errorProveedor" class="text-danger"></div>
+            </div>
+            <div class="modal-body">
+              <form id="form-proveedor-compra" role="form" name="form">
+                <div class="form-group has-feedback" ng-class="{'has-error': form.id.$invalid || exitsCustomer(), 'has-success': form.id.$valid}">           
+                    <input id="inputid" type="text" autocomplete="off" placeholder="Id"  class="form-control" name="id" ng-model="customers.id" required>                               
+                    <div ng-show="form.id.$dirty && form.id.$invalid || exitsCustomer()">
+                      <p class="help-block text-danger" ng-show="form.id.$error.required">Campo obligatorio</p>
+                      <p class="help-block text-danger" ng-show="exitsCustomer()">Ya existe un Cliente con este Id</p>
+                    </div>
+                </div>
+                <div class="form-group has-feedback" ng-class="{'has-error': form.name.$invalid, 'has-success': form.name.$valid}">
+                    <input id="inputname" type="text" placeholder="Nombre"  class="form-control" name="name" ng-model="customers.nombre" required>                               
+                    <div ng-show="form.name.$dirty && form.name.$invalid">
+                      <p class="help-block text-danger" ng-show="form.name.$error.required">Campo obligatorio</p>
+                    </div>
+                </div>               
+                <div class="form-group has-feedback" ng-class="{'has-error': form.email.$invalid, 'has-success': form.email.$valid}">
+                    <input id="inputEmail" type="email" placeholder="E-mail"  class="form-control" name="email" ng-model="customers.correo" required>                                 
+                    <div ng-show="form.email.$dirty && form.email.$invalid">
+                      <p class="help-block text-danger" ng-show="form.email.$error.required">Campo obligatorio</p>
+                      <p class="help-block text-danger" ng-show="form.email.$error.email">Email invalido</p>
+                    </div>
+                </div>
+                <div class="form-group has-feedback" ng-class="{'has-error': form.address.$invalid, 'has-success': form.address.$valid}">           
+                    <input id="inputaddress" type="text" placeholder="Dirección"  class="form-control" name="address" ng-model="customers.direccion" required>                               
+                    <div ng-show="form.address.$dirty && form.address.$invalid">
+                      <p class="help-block text-danger" ng-show="form.address.$error.required">Campo obligatorio</p>
+                    </div>
+                </div>
+                <div class="form-group has-feedback" ng-class="{'has-error': form.phone.$invalid, 'has-success': form.phone.$valid}">
+                    <input id="inputphone" type="text" placeholder="Teléfono"  class="form-control" name="phone" ng-model="customers.telefono" required>                               
+                    <div ng-show="form.phone.$dirty && form.phone.$invalid">
+                      <p class="help-block text-danger" ng-show="form.phone.$error.required">Campo obligatorio</p>
+                    </div>
+                </div>  
+                <div class="form-group has-feedback" ng-class="{'has-error': form.area.$invalid, 'has-success': form.area.$valid}">  
+                    <select id="inputarea" placeholder="Zona" class="form-control" name="area" ng-model="customers.area" required>
+                      <option>Zona Principal</option>
+                      <option>Zona Rural</option>
+                      <option>Zona Secundaria</option>
+                    </select> 
+                    <div ng-show="form.area.$dirty && form.area.$invalid">
+                      <p class="help-block text-danger" ng-show="form.area.$error.required">Campo obligatorio</p>
+                    </div>                   
+                </div>                   
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeAlert()">Cerrar</button>              
+              <button type="button" class="btn btn-primary btn-grabar-proveedor-compra" data-dismiss="modal" ng-click="createNewCustomer(form)" ng-disabled="form.$invalid || exitsCustomer()">Grabar</button>
+            </div>         
+          </div>
+        </div>
+      </div>
+      
+      <br>
+      <div class="panel panel-primary" id="detalle_compra">
+        <div class="panel-heading">
+          
+          <div class="input-group">
+            <span class="text-left panel-title">Página: {{tableParams.page()}}</span>                   
+            <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#newProvider" aria-describedby="basic-addon2">Nuevo Cliente</button> 
+            <span class="input-group-addon" id="basic-addon2"><a data-toggle="modal" data-target="#newProvider"><span class="glyphicon glyphicon-plus"></span></a></span>
+          </div>
+          
+          <div class="input-group" style="margin-top: 20px">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input type="text" class="form-control" placeholder="Buscar por Id" ng-model="buscar.id">
+          </div>
+        </div>        
+        
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table ng-table="tableParams" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th style="min-width: 80px;">
+                    Id                  
+                    <span ng-hide="sort" class="fa fa-sort-amount-asc" style="cursor: pointer" ng-click="ordenarPor('-id',true)"></span>
+                    <span ng-show="sort" class="fa fa-sort-amount-desc" style="cursor: pointer" ng-click="ordenarPor('id',false)"></span>                                    
+                  </th>
+                  <th style="min-width: 80px;">
+                    Nombre
+                    <span ng-hide="sort" class="fa fa-sort-amount-asc" style="cursor: pointer" ng-click="ordenarPor('-nombre',true)"></span>
+                    <span ng-show="sort" class="fa fa-sort-amount-desc" style="cursor: pointer" ng-click="ordenarPor('nombre',false)"></span> 
+                  </th>
+                  <th style="min-width: 80px;">Email</th>
+                  <th style="min-width: 80px;">Dirección</th>
+                  <th style="min-width: 80px;">Teléfono</th>
+                  <th style="min-width: 80px;">Zona</th>
+                  <th style="width:20px;"> </th>
+                  <th style="width:20px;"> </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="customer in $data | orderBy:ordenSeleccionado | filter:buscar">
+                  <td>{{ customer.id }}</td>
+                  <td>{{ customer.nombre }}</td>                  
+                  <td>{{ customer.correo }}</td>
+                  <td>{{ customer.direccion }}</td>
+                  <td>{{ customer.telefono }}</td>
+                  <td>{{ customer.area }}</td>
+                  <td><a ng-click="editCustomer(customer.id)" class="btn btn-small btn-primary">Edit</a></td>
+                  <td><a ng-click="deleteCustomer(customer.id)" class="btn btn-small btn-danger">Delete</a></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th style="border-right-width: 1px;">Datos por página: {{tableParams.count()}}</th>                  
+                </tr>                
+              </tfoot>            
+            </table>
+          </div>
+        </div><!-- /.box-body -->
+      </div>          
+    </div>
+  </div>
+</section><!-- /.content -->

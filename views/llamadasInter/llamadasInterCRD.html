@@ -1,0 +1,151 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Control de Llamadas Internacionales
+  </h1>  
+  <ol class="breadcrumb">
+    <li><a href="#/"><i class="fa fa-home"></i> Inicio</a></li>
+    <li><a href="#/llamadasInterCRD">Llamadas Internacionales</a></li>
+    <li class="active">Control de Llamadas Internacionales</li>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content"> 
+  <div class="row">
+    <div class="col-lg-12">          
+      <div class="modal fade" id="newProvider" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">Nuevo Producto</h4>
+              <div id="errorProveedor" class="text-danger"></div>
+            </div>
+            <div class="modal-body">
+              <form id="form-proveedor-compra" role="form" name="form">
+                 <div class="form-group has-feedback" ng-class="{'has-error': form.codigoBarras.$invalid || exitsProduct(), 'has-success': form.codigoBarras.$valid}">           
+                    <input id="inputcodigoBarras" type="text" autocomplete="off" placeholder="Código de barras"  class="form-control" name="codigoBarras" ng-model="productsList.codigoBarras" required>
+                    <div ng-show="form.codigoBarras.$dirty && form.codigoBarras.$invalid || exitsProduct()">
+                      <p class="help-block text-danger" ng-show="form.codigoBarras.$error.required">Campo obligatorio</p>
+                      <p class="help-block text-danger" ng-show="exitsProduct()">Ya existe un Producto con este código de barras</p>
+                    </div>
+                </div>
+                <div class="form-group has-feedback" ng-class="{'has-error': form.referencia.$invalid, 'has-success': form.referencia.$valid}">           
+                    <input id="inputreferencia" type="text" placeholder="Referencia"  class="form-control" name="referencia" ng-model="productsList.referencia" required>
+                    <div ng-show="form.referencia.$dirty && form.referencia.$invalid">
+                      <p class="help-block text-danger" ng-show="form.referencia.$error.required">Campo obligatorio</p>
+                    </div>
+                </div>               
+                <div class="form-group has-feedback" ng-class="{'has-error': form.descripcion.$invalid, 'has-success': form.descripcion.$valid}">           
+                    <input id="inputdescripcion" type="text" placeholder="Descripción"  class="form-control" name="descripcion" ng-model="productsList.descripcion" required>
+                    <div ng-show="form.descripcion.$dirty && form.descripcion.$invalid">
+                      <p class="help-block text-danger" ng-show="form.descripcion.$error.required">Campo obligatorio</p>                      
+                    </div>
+                </div>
+                <div class="form-group has-feedback" ng-class="{'has-error': form.precioUnitario.$invalid, 'has-success': form.precioUnitario.$valid}">           
+                    <input id="inputprecioUnitario" type="text" placeholder="Precio Unitario"  class="form-control" name="precioUnitario" ng-model="productsList.precioUnitario" required>                               
+                    <div ng-show="form.precioUnitario.$dirty && form.precioUnitario.$invalid">
+                      <p class="help-block text-danger" ng-show="form.precioUnitario.$error.required">Campo obligatorio</p>
+                    </div>
+                </div>
+                <div class="form-group has-feedback" ng-class="{'has-error': form.grupo.$invalid, 'has-success': form.grupo.$valid}">  
+                    <select id="inputgrupo" placeholder="Grupo" class="form-control" name="grupo" ng-model="productsList.grupo" required>
+                      <option>Verduras</option>
+                      <option>Frutas</option>
+                      <option>Abarrotes</option>
+                    </select> 
+                    <div ng-show="form.grupo.$dirty && form.grupo.$invalid">
+                      <p class="help-block text-danger" ng-show="form.grupo.$error.required">Campo obligatorio</p>
+                    </div>                   
+                </div>   
+                <div class="form-group has-feedback" ng-class="{'has-error': form.unidad.$invalid, 'has-success': form.unidad.$valid}">  
+                    <select id="inputunidad" placeholder="Unidad" class="form-control" name="unidad" ng-model="productsList.unidad" required>
+                      <option>Kilogramos</option>
+                      <option>Libras</option>
+                      <option>Toneladas largas</option>
+                      <option>Toneladas metricas</option>
+                      <option>Toneladas cortas</option>
+                      <option>Gramos</option>
+                      <option>Unidades</option>
+                      <option>Litros</option>
+                      <option>Galones</option>
+                      <option>Barriles</option>
+                      <option>Latas</option>
+                      <option>Cajas</option>
+                      <option>Millares</option>
+                      <option>Metros cubicos</option>
+                      <option>Metros</option>
+                      <option>Otros</option>
+                    </select> 
+                    <div ng-show="form.unidad.$dirty && form.unidad.$invalid">
+                      <p class="help-block text-danger" ng-show="form.unidad.$error.required">Campo obligatorio</p>
+                    </div>                   
+                </div>                   
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>              
+              <button type="button" class="btn btn-primary btn-grabar-proveedor-compra" data-dismiss="modal" ng-click="createNewProduct(form)" ng-disabled="form.$invalid || exitsProduct()">Grabar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <br>
+      <div class="panel panel-primary" id="detalle_compra">
+        <div class="panel-heading">
+          
+          <div class="input-group">
+            <span class="text-left panel-title">Página: {{tableParams.page()}}</span>                               
+          </div>
+          
+          <div class="input-group" style="margin-top: 20px">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input type="text" class="form-control" placeholder="Buscar por código de barras" ng-model="buscar.codigoBarras">
+          </div>
+        </div>        
+        
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table ng-table="tableParams" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th style="min-width: 80px;">
+                    Código de barras
+                    <span ng-hide="sort" class="fa fa-sort-amount-asc" style="cursor: pointer" ng-click="ordenarPor('-codigoBarras',true)"></span>
+                    <span ng-show="sort" class="fa fa-sort-amount-desc" style="cursor: pointer" ng-click="ordenarPor('codigoBarras',false)"></span>                                    
+                  </th>
+                  <th style="min-width: 80px;">
+                    Referencia
+                    <span ng-hide="sort" class="fa fa-sort-amount-asc" style="cursor: pointer" ng-click="ordenarPor('-referencia',true)"></span>
+                    <span ng-show="sort" class="fa fa-sort-amount-desc" style="cursor: pointer" ng-click="ordenarPor('referencia',false)"></span> 
+                  </th>
+                  <th style="min-width: 80px;">Descripción</th>
+                  <th style="min-width: 80px;">Precio Unitario</th>
+                  <th style="min-width: 80px;">Grupo</th>
+                  <th style="min-width: 80px;">Unidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="product in $data | orderBy:ordenSeleccionado | filter:buscar">
+                  <td>{{ product.codigoBarras }}</td>
+                  <td>{{ product.referencia }}</td>                  
+                  <td>{{ product.descripcion }}</td>
+                  <td>{{ product.precioUnitario }}</td>
+                  <td>{{ product.grupo }}</td>
+                  <td>{{ product.unidad }}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th style="border-right-width: 1px;">Datos por página: {{tableParams.count()}}</th>                  
+                </tr>                
+              </tfoot>            
+            </table>
+          </div>
+        </div><!-- /.box-body -->
+      </div>          
+    </div>
+  </div>
+</section><!-- /.content -->

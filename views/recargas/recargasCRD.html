@@ -112,29 +112,33 @@
               <thead>
                 <tr>
                   <th style="min-width: 80px;">
-                    Código de barras
+                    Código Cliente
                     <span ng-hide="sort" class="fa fa-sort-amount-asc" style="cursor: pointer" ng-click="ordenarPor('-codigoBarras',true)"></span>
                     <span ng-show="sort" class="fa fa-sort-amount-desc" style="cursor: pointer" ng-click="ordenarPor('codigoBarras',false)"></span>                                    
                   </th>
                   <th style="min-width: 80px;">
-                    Referencia
+                    Nombre del Cliente
                     <span ng-hide="sort" class="fa fa-sort-amount-asc" style="cursor: pointer" ng-click="ordenarPor('-referencia',true)"></span>
                     <span ng-show="sort" class="fa fa-sort-amount-desc" style="cursor: pointer" ng-click="ordenarPor('referencia',false)"></span> 
                   </th>
-                  <th style="min-width: 80px;">Descripción</th>
-                  <th style="min-width: 80px;">Precio Unitario</th>
-                  <th style="min-width: 80px;">Grupo</th>
-                  <th style="min-width: 80px;">Unidad</th>
+                  <th style="min-width: 80px;">Tipo de Cliente</th>
+                  <th style="min-width: 80px;">Teléfono</th>
+                  <th style="min-width: 80px;">Saldo Inicial</th>
+                  <th style="min-width: 80px;">Abonos</th>
+                  <th style="min-width: 80px;">Recibos</th>
+                  <th style="min-width: 80px;">Saldo Final</th>
                 </tr>
               </thead>
               <tbody>
                 <tr ng-repeat="product in $data | orderBy:ordenSeleccionado | filter:buscar">
-                  <td>{{ product.codigoBarras }}</td>
-                  <td>{{ product.referencia }}</td>                  
-                  <td>{{ product.descripcion }}</td>
-                  <td>{{ product.precioUnitario }}</td>
-                  <td>{{ product.grupo }}</td>
-                  <td>{{ product.unidad }}</td>
+                  <td> 111024</td>
+                  <td> Yeison Betancourt </td>                  
+                  <td> A </td>
+                  <td> 3662652527 </td>
+                  <td> 100000</td>
+                  <td> 0 </td>
+                  <td> 0 </td>
+                  <td> 30000 </td>
                 </tr>
               </tbody>
               <tfoot>

@@ -112,29 +112,37 @@
               <thead>
                 <tr>
                   <th style="min-width: 80px;">
-                    Código de barras
+                    Número
                     <span ng-hide="sort" class="fa fa-sort-amount-asc" style="cursor: pointer" ng-click="ordenarPor('-codigoBarras',true)"></span>
                     <span ng-show="sort" class="fa fa-sort-amount-desc" style="cursor: pointer" ng-click="ordenarPor('codigoBarras',false)"></span>                                    
                   </th>
                   <th style="min-width: 80px;">
-                    Referencia
+                    Corte
                     <span ng-hide="sort" class="fa fa-sort-amount-asc" style="cursor: pointer" ng-click="ordenarPor('-referencia',true)"></span>
                     <span ng-show="sort" class="fa fa-sort-amount-desc" style="cursor: pointer" ng-click="ordenarPor('referencia',false)"></span> 
                   </th>
-                  <th style="min-width: 80px;">Descripción</th>
-                  <th style="min-width: 80px;">Precio Unitario</th>
-                  <th style="min-width: 80px;">Grupo</th>
-                  <th style="min-width: 80px;">Unidad</th>
+                  <th style="min-width: 80px;">Minutos</th>
+                  <th style="min-width: 80px;">Cargo Básico</th>
+                  <th style="min-width: 80px;">Abono</th>
+                  <th style="min-width: 80px;">Total S+C</th>
+                  <th style="min-width: 80px;">Recibo</th>
+                  <th style="min-width: 80px;">Último Pago</th>
+                  <th style="min-width: 80px;">Responsable</th>
+                  <th style="min-width: 80px;">Observaciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr ng-repeat="product in $data | orderBy:ordenSeleccionado | filter:buscar">
-                  <td>{{ product.codigoBarras }}</td>
-                  <td>{{ product.referencia }}</td>                  
-                  <td>{{ product.descripcion }}</td>
-                  <td>{{ product.precioUnitario }}</td>
-                  <td>{{ product.grupo }}</td>
-                  <td>{{ product.unidad }}</td>
+                  <td>3104424736</td>
+                  <td>16/10/2015</td>                  
+                  <td>1200</td>
+                  <td>106000</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>16/09/2015</td>
+                  <td>Cabinas J y V</td>
+                  <td></td>
                 </tr>
               </tbody>
               <tfoot>
